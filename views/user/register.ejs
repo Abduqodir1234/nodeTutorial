@@ -1,0 +1,39 @@
+<%-  include ("../main/navbar.ejs") %>
+<div class=" register-h-100 ">
+        <div class=" register_component_container">
+            
+            <!-- Header -->
+            <div class="register_logo_container">
+                <img src="/static/images/logo.png" width="100px" height="80px" />        
+            </div>
+            <div class="register_logo_text">
+                Dream House Building
+            </div>
+            <!-- Header -->
+
+            <!-- Form Part -->
+            <form method="post" action="/user/register/form/submit" class="registerform" content-type="application/json">
+                <label>
+                    Full Name
+                </label>
+                <input 
+                 required
+                 type="text"
+                 class="form-control" 
+                 name="fullname"
+                >
+                <label>
+                    Password
+                </label>
+                <input
+                 required
+                 type="password"
+                 class="form-control" 
+                 name="password"
+                >
+                
+                <input type="submit" class="btn btn-success-1 text-white mt-2" >
+            </form>
+            <!-- Form Part -->
+        </div>
+</div>
