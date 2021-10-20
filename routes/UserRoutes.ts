@@ -1,16 +1,11 @@
 import {Router} from "express"
+import CodeHandler from "../controllers/UserRoutes/CodeHandle";
 import LoginController from "../controllers/UserRoutes/login";
 import RegisterController from "../controllers/UserRoutes/RegisterController";
-import RegisterFormController from "../controllers/UserRoutes/RegisterFormSubmit";
  
 
 let UserRouter = Router()
-
-
- UserRouter.post("/register/form/submit", function(req, res) {
-    var name = req.body.fullname;
-    console.log(name);
-       
-})
-
+UserRouter.post("/register",RegisterController)
+UserRouter.post("/verify",LoginController)
+UserRouter.post("/verify/code",CodeHandler)
 export default UserRouter;

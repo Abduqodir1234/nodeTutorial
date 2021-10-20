@@ -7,17 +7,15 @@ import helmet from "helmet";
 /*
     Basic Port Configuration
 */
-let PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 4000;
 let app= express();
-app.set("view engine","ejs")
-
 
 
 /* 
     Database Configuration
 */
 
-let dbUrl = "mongodb://127.0.0.1:27017/Tutorial1"
+let dbUrl = "mongodb://127.0.0.1:27017/WeddingTaskDatabase"
 mongoose.connect(dbUrl)
     .then(()=>{
         app.listen(PORT);
@@ -35,9 +33,7 @@ mongoose.connect(dbUrl)
 app.use("/static",express.static("public"))
 
 
-/*
-    URLs
-*/
+
 
 
 
@@ -72,16 +68,15 @@ app.use((req,res,next)=>{
 /*
     Body Parser
 */
-app.use(bodyParser.json());       // to support JSON-encoded bodies
-app.use((req,res,next)=>{
-    res.setHeader("Content-Type","application/json")
-    next()
-});       // to support JSON-encoded bodies
-app.use(bodyParser.raw());       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({extended:true})); // to support URL-encoded bodies
-// app.use(helmet())
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded({extended:false}))
+
 app.post('/send_data', function(req, res) {
     console.log(req.body); // the posted data
 });
 
+
+/*
+    URLs
+*/
 app.use("/user",UserRouter)

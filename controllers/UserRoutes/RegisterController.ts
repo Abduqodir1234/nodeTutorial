@@ -1,10 +1,27 @@
 import {Request,Response} from "express"
-let RegisterController =  (req:Request,res:Response)=>{
-    console.log(req.body);
-    
-    let context = {
-        "page_title":"Register",
-    }
-    res.render("user/register",context)
+import User from "../../Model/UserModel";
+let RegisterController = async (req:Request,res:Response)=>{
+    let data = req?.body;
+    var newUser = new User({
+        fullName:data?.fullName,
+        birthday:data?.birthday,
+        gender:data?.gender,
+        province_id:data?.province_id,
+        city_id:data?.city_id,
+        phone:data?.phone,
+    });
+    await newUser.save()
+    .then(()=>{
+        res.status(200).send({"errors":false,"message":"New user created"})
+    })
+    .catch(erro2r=>{
+        if(erro2r?.keyValue){
+            res.send({"errors":true,"message":`User with this phone number exists`})
+        }
+        else{
+            res.send({"error":true,"message":erro2r})
+        }
+        res.status(404).send(erro2r)
+    })
 }
 export default RegisterController;
