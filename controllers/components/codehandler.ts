@@ -15,8 +15,11 @@ let codehandler = async (code:String,phone:String)=>{
               code:code
             })
           .then((response2:any)=>{
-              ans=true;
-            //   console.log(response2);
+              if(response2.status === "approved"){
+                ans=true
+              }else{
+                ans=false
+              }
              
           })
           .catch((err:any)=>{

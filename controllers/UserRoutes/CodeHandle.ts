@@ -7,7 +7,7 @@ let CodeHandler = async (req:Request,res:Response)=>{
     let codehandle2:any = await codehandler(req?.body?.code,req?.body?.phone)
     let one:any = await User.find({phone:req.body.phone})
     if(codehandle2){
-       const token = await jwt.sign({username:one[0].fullName},accessTokenSecret)
+       const token = await jwt.sign({username:one[0].fullName},accessTokenSecret,{expiresIn:"30d"})
        res.json({"error":false,"token":token,"type":"Bearer"})
     }
     else{

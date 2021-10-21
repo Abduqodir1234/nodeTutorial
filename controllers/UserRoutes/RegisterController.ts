@@ -6,8 +6,7 @@ let RegisterController = async (req:Request,res:Response)=>{
         fullName:data?.fullName,
         birthday:data?.birthday,
         gender:data?.gender,
-        province_id:data?.province_id,
-        city_id:data?.city_id,
+        location:{type:"Point",coordinates:req.body.coordinates},
         phone:data?.phone,
     });
     await newUser.save()
